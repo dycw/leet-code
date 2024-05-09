@@ -42,10 +42,10 @@ if TYPE_CHECKING:
 
 
 def summary_ranges(nums: list[int], /) -> list[str]:
-    return list(starmap(format_range, yield_ranges(nums)))
+    return list(starmap(_format_range, _yield_ranges(nums)))
 
 
-def yield_ranges(nums: list[int]) -> Iterator[tuple[int, int]]:
+def _yield_ranges(nums: list[int]) -> Iterator[tuple[int, int]]:
     i = 0
     while i < len(nums):
         value = nums[i]
@@ -57,5 +57,5 @@ def yield_ranges(nums: list[int]) -> Iterator[tuple[int, int]]:
         i += len(segment1)
 
 
-def format_range(start: int, end: int, /) -> str:
+def _format_range(start: int, end: int, /) -> str:
     return str(start) if start == end else f"{start}->{end}"
