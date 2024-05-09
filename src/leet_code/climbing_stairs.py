@@ -38,11 +38,11 @@ def climb_stairs(n: int, /) -> int:
     if n <= 2:
         return n
     try:
-        res_n2 = _CACHE[n - 2]
+        res = _CACHE[n - 2]
     except KeyError:
-        res_n2 = _CACHE[n - 2] = climb_stairs(n - 2)
+        res = _CACHE[n - 2] = climb_stairs(n - 2)
     try:
         res_n1 = _CACHE[n - 1]
     except KeyError:
         res_n1 = _CACHE[n - 1] = climb_stairs(n - 1)
-    return res_n2 + res_n1
+    return res + res_n1
