@@ -73,7 +73,7 @@ def _path_sum(nodes: Iterable[TreeNode], /) -> int:
 
 
 def has_path_sum_top(target_sum: int, /, *, root: TreeNode | None = None) -> bool:
-    if not root:
+    if root is None:
         return False
     if root.val == target_sum and not root.left and not root.right:
         return True
