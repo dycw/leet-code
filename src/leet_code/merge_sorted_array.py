@@ -40,18 +40,6 @@ from __future__ import annotations
 
 from rich import print
 
-# init [<1>, 2, 3, 0, 0, 0], [<2>, 5, 6]
-# since l < r, move left: [1, <2>, 3, 0, 0, 0], [<2>, 5, 6]
-# since l >= r, insert: [1, 2, <2>, 3, 0, 0], [<5>, 6]
-# since l < r, move left: [1, 2, 2, <3>, 0, 0], [<5>, 6]
-# since l < r, terminate: [1, 2, 2, 3, <5, 6>], []
-
-# init [<2>, 5, 6, 0, 0, 0], [<1>, 2, 3]
-# since l >= r, insert: [1, <2>, 5, 6, 0, 0], [<2>, 3]
-# since l >= r, insert: [1, 2, <2>, 5, 6, 0], [<3>]
-# since l < r, move left: [1, 2, 2, <5>, 6, 0], [<3>]
-# since l >= r, insert: [1, 2, 2, 3, <5>, 6], []
-
 
 def merge_sorted_array(nums1: list[int], m: int, nums2: list[int], n: int) -> None:
     # assuming we cannot use list.sort()
