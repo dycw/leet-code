@@ -26,7 +26,6 @@ The number of nodes in the tree is in the range [1, 104].
 
 from __future__ import annotations
 
-from statistics import mean
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -43,8 +42,8 @@ def average_of_levels(*, root: TreeNode | None = None) -> list[float]:
 
 def yield_averages_by_level(root: TreeNode, /) -> Iterator[float]:
     nodes = [root]
-    while len(nodes) >= 1:
-        yield mean(node.val for node in nodes)
+    while (length := len(nodes)) >= 1:
+        yield sum(node.val for node in nodes) / length
         nodes = list(yield_children(nodes))
 
 
