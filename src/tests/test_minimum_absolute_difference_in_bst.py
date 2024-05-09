@@ -34,6 +34,15 @@ case_2_node_2.left = case_2_node_3
 case_2_node_2.right = case_2_node_4
 
 
+case_3_node_0 = TreeNode(val=236)
+case_3_node_1 = TreeNode(val=104)
+case_3_node_2 = TreeNode(val=701)
+case_3_node_3 = TreeNode(val=227)
+case_3_node_4 = TreeNode(val=911)
+case_3_node_0.left = case_3_node_1
+case_3_node_0.right = case_3_node_2
+
+
 class TestGetMinimumDifference:
     @mark.parametrize("func", [param(get_minimum_difference)])
     @mark.parametrize(
