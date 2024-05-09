@@ -18,10 +18,10 @@ class TestPlusOne:
     @mark.parametrize(
         ("digits", "expected"),
         [
-            param([1, 2, 3], [1, 2, 4]),
-            param([4, 3, 2, 1], [4, 3, 2, 2]),
-            param([9], [1, 0]),
-            param([8, 9, 9, 9], [9, 0, 0, 0]),
+            param([1, 2, 3], [1, 2, 4], marks=mark.benchmark(group="1")),
+            param([4, 3, 2, 1], [4, 3, 2, 2], marks=mark.benchmark(group="2")),
+            param([9], [1, 0], marks=mark.benchmark(group="3")),
+            param([8, 9, 9, 9], [9, 0, 0, 0], marks=mark.benchmark(group="4")),
         ],
         ids=str,
     )
@@ -33,7 +33,4 @@ class TestPlusOne:
         digits: list[int],
         expected: list[int],
     ) -> None:
-        def wrapper() -> list[int]:
-            return func(deepcopy(digits))
-
-        assert benchmark(wrapper) == expected
+        assert benchmark(lambda: func(deepcopy(digits))) == expected
