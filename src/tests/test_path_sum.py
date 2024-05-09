@@ -8,6 +8,8 @@ from leet_code.path_sum import has_path_sum
 from leet_code.structures import TreeNode
 
 if TYPE_CHECKING:
+    from collections.abc import Callable
+
     from pytest_benchmark.fixture import BenchmarkFixture
 
 case_1_node_0 = TreeNode(val=5)
@@ -33,7 +35,7 @@ case_2_node_0 = TreeNode(val=1)
 case_2_node_1 = TreeNode(val=2)
 case_2_node_2 = TreeNode(val=3)
 case_2_node_0.left = case_2_node_1
-case_2_node_1.right = case_2_node_2
+case_2_node_0.right = case_2_node_2
 
 
 class TestPathSum:
@@ -41,9 +43,9 @@ class TestPathSum:
     @mark.parametrize(
         ("root", "target_sum", "expected"),
         [
-            param(case_1_node_0, 22, True),
-            param(case_2_node_0, 5, False),
-            param(None, 0, False),
+            param(case_1_node_0, 22, True, marks=mark.benchmark(group="1")),
+            param(case_2_node_0, 5, False, marks=mark.benchmark(group="2")),
+            param(None, 0, False, marks=mark.benchmark(group="3")),
         ],
         ids=str,
     )
@@ -51,8 +53,9 @@ class TestPathSum:
         self,
         *,
         benchmark: BenchmarkFixture,
+        func: Callable[[int], bool],
         root: TreeNode | None,
         target_sum: int,
         expected: bool,
     ) -> None:
-        assert benchmark(has_path_sum, target_sum, root=root) is expected
+        assert benchmark(func, target_sum, root=root) is expected

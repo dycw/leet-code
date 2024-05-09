@@ -38,5 +38,35 @@ The number of nodes in the tree is in the range [0, 5000].
 
 from __future__ import annotations
 
+from itertools import chain
+from typing import TYPE_CHECKING
 
-def has_path_sum(target_sum: int, /, *, root: TreeNode | None = None) -> bool: ...
+if TYPE_CHECKING:
+    from collections.abc import Iterable, Iterator
+
+    from leet_code.structures import TreeNode
+
+
+def has_path_sum(target_sum: int, /, *, root: TreeNode | None = None) -> bool:
+    if root is None:
+        return False
+    return any(_path_sum(path) == target_sum for path in _yield_paths(root))
+
+
+def _yield_paths(
+    node: TreeNode, /, *, head: Iterable[TreeNode] | None = None
+) -> Iterator[Iterable[TreeNode]]:
+    left, right = node.left, node.right
+    init_head = [] if head is None else head
+    new_head = list(chain(init_head, [node]))
+    if (left is None) and (right is None):  # leaf
+        yield new_head
+    else:
+        if left is not None:
+            yield from _yield_paths(left, head=new_head)
+        if right is not None:
+            yield from _yield_paths(right, head=new_head)
+
+
+def _path_sum(nodes: Iterable[TreeNode], /) -> int:
+    return sum(node.val for node in nodes)
