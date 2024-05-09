@@ -53,6 +53,18 @@ def has_cycle(*, head: ListNode | None = None) -> bool:
     if head is None:
         return False
 
+    slow, fast = head, head
+    while (
+        ((sn := slow.next) is not None)
+        and ((fn := fast.next) is not None)
+        and ((fnn := fn.next) is not None)
+    ):
+        slow = sn
+        fast = fnn
+        if slow == fast:
+            return True
+    return False
+
     seen: set[ListNode] = set()
     node = head
     while (next_ := node.next) is not None:
