@@ -29,20 +29,16 @@ ransomNote and magazine consist of lowercase English letters.
 
 from __future__ import annotations
 
-from collections import Counter
+from collections import Counter  # faster than typing!
 
 
 def can_construct(ransom_note: str, magazine: str, /) -> bool:
     ransom_note_counts = Counter(ransom_note)
-    magazine_counts = Counter(magazine)
     return all(
-        _can_construct_key(key, count, magazine_counts)
-        for key, count in ransom_note_counts.items()
+        _can_construct_key(letter, count, magazine)
+        for letter, count in ransom_note_counts.items()
     )
 
 
-def _can_construct_key(key: str, count: int, magazine: Counter[str], /) -> bool:
-    try:
-        return count <= magazine[key]
-    except KeyError:
-        return False
+def _can_construct_key(letter: str, count: int, magazine: str, /) -> bool:
+    return count <= magazine.count(letter)
