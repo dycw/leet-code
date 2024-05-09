@@ -52,23 +52,7 @@ Constraints:
 from __future__ import annotations
 
 
-def remove_element(nums: list[int], val: int, *, optimal: bool = False) -> int:
-    if optimal:
-        return _remove_element_optimal(nums, val)
-    return _remove_element_mine(nums, val)
-
-
-def _remove_element_mine(nums: list[int], val: int) -> int:
-    i = 0
-    for _ in range(len(nums)):
-        if nums[i] == val:
-            _ = nums.pop(i)
-        else:
-            i += 1
-    return len(nums)
-
-
-def _remove_element_optimal(nums: list[int], val: int) -> int:
+def remove_element(nums: list[int], val: int, /) -> int:
     for i in range(len(nums) - 1, -1, -1):
         if nums[i] == val:
             _ = nums.pop(i)
