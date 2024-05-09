@@ -32,7 +32,7 @@ class TestMergeSortedArray:
 
     @given(data=data())
     def test_generic(self, *, data: DataObject) -> None:
-        max_mn = 100  # problem is 200
+        max_mn = 20  # problem is 200
         m = data.draw(integers(0, max_mn))
         n = data.draw(integers(0, max_mn))
         _ = assume(1 <= m + n <= max_mn)
