@@ -26,7 +26,6 @@ The number of nodes in the tree is in the range [1, 104].
 
 from __future__ import annotations
 
-from itertools import chain
 from statistics import mean
 from typing import TYPE_CHECKING
 
@@ -46,10 +45,12 @@ def yield_averages_by_level(root: TreeNode, /) -> Iterator[float]:
     nodes = [root]
     while len(nodes) >= 1:
         yield mean(node.val for node in nodes)
-        nodes = list(get_children(nodes))
+        nodes = list(yield_children(nodes))
 
 
-def get_children(nodes: Iterable[TreeNode], /) -> Iterator[TreeNode]:
-    children_by_node = [[node.left, node.right] for node in nodes]
-    all_children = chain(*children_by_node)
-    return (c for c in all_children if c is not None)
+def yield_children(nodes: Iterable[TreeNode], /) -> Iterator[TreeNode]:
+    for node in nodes:
+        if (left := node.left) is not None:
+            yield left
+        if (right := node.right) is not None:
+            yield right
