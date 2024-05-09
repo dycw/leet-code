@@ -27,7 +27,7 @@ case_2_node_1.left = case_2_node_3
 case_2_node_1.right = case_2_node_4
 
 
-class TestMaxDepth:
+class TestAverageOfLevels:
     @mark.parametrize(
         ("root", "expected"),
         [
