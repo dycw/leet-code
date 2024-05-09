@@ -70,3 +70,13 @@ def _yield_paths(
 
 def _path_sum(nodes: Iterable[TreeNode], /) -> int:
     return sum(node.val for node in nodes)
+
+
+def has_path_sum_top(target_sum: int, /, *, root: TreeNode | None = None) -> bool:
+    if not root:
+        return False
+    if root.val == target_sum and not root.left and not root.right:
+        return True
+    return has_path_sum_top(target_sum - root.val, root=root.left) or has_path_sum_top(
+        target_sum - root.val, root=root.right
+    )

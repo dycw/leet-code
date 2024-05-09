@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 
 from pytest import mark, param
 
-from leet_code.path_sum import has_path_sum
+from leet_code.path_sum import has_path_sum, has_path_sum_top
 from leet_code.structures import TreeNode
 
 if TYPE_CHECKING:
@@ -39,7 +39,7 @@ case_2_node_0.right = case_2_node_2
 
 
 class TestPathSum:
-    @mark.parametrize("func", [param(has_path_sum)])
+    @mark.parametrize("func", [param(has_path_sum), param(has_path_sum_top)])
     @mark.parametrize(
         ("root", "target_sum", "expected"),
         [
