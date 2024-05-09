@@ -59,6 +59,7 @@ def merge_sorted_array(nums1: list[int], m: int, nums2: list[int], n: int) -> No
     while (num_skips <= m) and (num_insertions < n):
         value1, value2 = nums1[index1], nums2[index2]
         print("loop start", locals())
+        num_left_checked += 1
         if value1 < value2:
             num_skips += 1
             index1 += 1
