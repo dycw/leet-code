@@ -18,26 +18,27 @@ class TestMergeSortedArray:
             param([2, 5, 6, 0, 0, 0], [1, 2, 3], [1, 2, 2, 3, 5, 6]),
             param([1], [], [1]),
             param([0], [1], [1]),
+            param([4, 0, 0, 0, 0, 0], [1, 2, 3, 5, 6], [1, 2, 3, 4, 5, 6]),
         ],
         ids=str,
     )
     def test_main(
         self, *, nums1: list[int], nums2: list[int], expected: list[int]
     ) -> None:
-        m, n = len(nums1), len(nums2)
+        n = len(nums2)
+        m = len(nums1) - n
         merge_sorted_array(nums1, m, nums2, n)
         assert nums1 == expected
 
     @given(data=data())
     def test_generic(self, *, data: DataObject) -> None:
-        m = data.draw(integers(0, 200))
-        n = data.draw(integers(0, 200))
-        _ = assume(1 <= m + n <= 200)
-        nums1_without_zeros = sorted(
-            data.draw(lists_fixed_length(integers(-100, 100), m))
-        )
-        nums1 = list(chain(nums1_without_zeros, repeat(0, times=n)))
+        max_mn = 100  # problem is 200
+        m = data.draw(integers(0, max_mn))
+        n = data.draw(integers(0, max_mn))
+        _ = assume(1 <= m + n <= max_mn)
+        nums1_core = sorted(data.draw(lists_fixed_length(integers(-100, 100), m)))
+        nums1 = list(chain(nums1_core, repeat(0, times=n)))
         nums2 = sorted(data.draw(lists_fixed_length(integers(-100, 100), n)))
         merge_sorted_array(nums1, m, nums2, n)
-        expected = sorted(chain(nums1_without_zeros, nums2))
+        expected = sorted(chain(nums1_core, nums2))
         assert nums1 == expected
