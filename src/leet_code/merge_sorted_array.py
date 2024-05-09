@@ -54,22 +54,21 @@ from rich import print
 
 
 def merge_sorted_array(nums1: list[int], m: int, nums2: list[int], n: int) -> None:
-    index1, index2, num_left_checked, num_insertions = 0, 0, 0, 0
-    max_left_check = m - n
-    while (num_insertions < n) and (num_left_checked <= max_left_check):
+    # assuming we cannot use list.sort()
+    num_insertions, num_skips, index1, index2 = 0, 0, 0, 0
+    while (num_skips <= m) and (num_insertions < n):
         value1, value2 = nums1[index1], nums2[index2]
         print("loop start", locals())
         if value1 < value2:
+            num_skips += 1
             index1 += 1
-            num_left_checked += 1
             print("after <", locals())
         else:
+            num_insertions += 1
             nums1.insert(index1, value2)
             _ = nums1.pop()
-            num_insertions += 1
             index1 += 1
             index2 += 1
-            num_left_checked += 1
             print("after >=", locals())
 
     len_tail = n - num_insertions
