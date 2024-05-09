@@ -42,4 +42,8 @@ class TreeNode:
 
 
 def max_depth(*, root: TreeNode | None = None) -> int:
-    pass
+    if root is None:
+        return 0
+    left_depth = max_depth(root=root.left) + 1
+    right_depth = max_depth(root=root.right) + 1
+    return max(left_depth, right_depth)
