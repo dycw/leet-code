@@ -53,11 +53,11 @@ def has_cycle(*, head: ListNode | None = None) -> bool:
     if head is None:
         return False
 
-    seen: set[int] = set()
+    seen: set[ListNode] = set()
     node = head
     while (next_ := node.next) is not None:
-        if (id_ := id(node)) in seen:
+        if node in seen:
             return True
-        seen.add(id_)
+        seen.add(node)
         node = next_
     return False
