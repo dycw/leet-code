@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from itertools import chain, repeat
 
-from hypothesis import given
+from hypothesis import assume, given
 from hypothesis.strategies import DataObject, data, integers
 from pytest import mark, param
 from utilities.hypothesis import lists_fixed_length
@@ -32,6 +32,7 @@ class TestMergeSortedArray:
     def test_generic(self, *, data: DataObject) -> None:
         m = data.draw(integers(0, 200))
         n = data.draw(integers(0, 200))
+        _ = assume(1 <= m + n <= 200)
         nums1_without_zeros = sorted(
             data.draw(lists_fixed_length(integers(-100, 100), m))
         )
