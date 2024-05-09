@@ -33,7 +33,4 @@ class TestPlusOne:
         digits: list[int],
         expected: list[int],
     ) -> None:
-        def wrapper() -> list[int]:
-            return func(deepcopy(digits))
-
-        assert benchmark(wrapper) == expected
+        assert benchmark(lambda: func(deepcopy(digits))) == expected

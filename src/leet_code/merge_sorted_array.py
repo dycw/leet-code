@@ -41,7 +41,7 @@ from __future__ import annotations
 from rich import print
 
 
-def merge_sorted_array(nums1: list[int], m: int, nums2: list[int], n: int) -> None:
+def merge_sorted_array(nums1: list[int], m: int, nums2: list[int], n: int, /) -> None:
     # assuming we cannot use list.sort()
     num_insertions, num_skips, index1, index2 = 0, 0, 0, 0
     while (num_skips <= m) and (num_insertions < n):
@@ -62,3 +62,11 @@ def merge_sorted_array(nums1: list[int], m: int, nums2: list[int], n: int) -> No
     len_tail = n - num_insertions
     if len_tail >= 1:
         nums1[-len_tail:] = nums2[-len_tail:]
+
+
+def merge_sorted_array_top(
+    nums1: list[int], m: int, nums2: list[int], n: int, /
+) -> None:
+    for i in range(n):
+        nums1[m + i] = nums2[i]
+    nums1.sort()
