@@ -2,7 +2,8 @@ from __future__ import annotations
 
 from pytest import mark, param
 
-from leet_code.linked_list_cycle import ListNode, has_cycle
+from leet_code.linked_list_cycle import has_cycle
+from leet_code.structures import ListNode
 
 case_1_node_0 = ListNode(3)
 case_1_node_1 = ListNode(2)

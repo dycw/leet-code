@@ -41,12 +41,10 @@ Follow up: Can you solve it using O(1) (i.e. constant) memory?
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
 
-class ListNode:
-    def __init__(self, x: int, /) -> None:
-        super().__init__()
-        self.val = x
-        self.next: ListNode | None = None
+if TYPE_CHECKING:
+    from leet_code.structures import ListNode
 
 
 def has_cycle(*, head: ListNode | None = None) -> bool:
@@ -63,13 +61,4 @@ def has_cycle(*, head: ListNode | None = None) -> bool:
         fast = fnn
         if slow == fast:
             return True
-    return False
-
-    seen: set[ListNode] = set()
-    node = head
-    while (next_ := node.next) is not None:
-        if node in seen:
-            return True
-        seen.add(node)
-        node = next_
     return False
