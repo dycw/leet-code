@@ -26,19 +26,10 @@ The number of nodes in the tree is in the range [0, 104].
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
 
-class TreeNode:
-    def __init__(
-        self,
-        *,
-        val: int = 0,
-        left: TreeNode | None = None,
-        right: TreeNode | None = None,
-    ) -> None:
-        super().__init__()
-        self.val = val
-        self.left = left
-        self.right = right
+if TYPE_CHECKING:
+    from leet_code.structures import TreeNode
 
 
 def max_depth(*, root: TreeNode | None = None) -> int:

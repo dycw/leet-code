@@ -2,7 +2,8 @@ from __future__ import annotations
 
 from pytest import mark, param
 
-from leet_code.maximum_depth_of_binary_tree import TreeNode, max_depth
+from leet_code.maximum_depth_of_binary_tree import max_depth
+from leet_code.structures import TreeNode
 
 case_1_node_0 = TreeNode(val=3)
 case_1_node_1 = TreeNode(val=9)
