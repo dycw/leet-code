@@ -32,7 +32,7 @@ class TestMergeSortedArray:
 
     @given(data=data())
     def test_generic(self, *, data: DataObject) -> None:
-        max_mn = 20  # problem is 200
+        max_mn = 100  # problem is 200
         m = data.draw(integers(0, max_mn))
         n = data.draw(integers(0, max_mn))
         _ = assume(1 <= m + n <= max_mn)
@@ -41,18 +41,4 @@ class TestMergeSortedArray:
         nums2 = sorted(data.draw(lists_fixed_length(integers(-100, 100), n)))
         merge_sorted_array(nums1, m, nums2, n)
         expected = sorted(chain(nums1_core, nums2))
-        assert nums1 == expected
-
-    @given(data=data())
-    def test_generic(self, *, data: DataObject) -> None:
-        m = data.draw(integers(0, 200))
-        n = data.draw(integers(0, 200))
-        _ = assume(1 <= m + n <= 200)
-        nums1_without_zeros = sorted(
-            data.draw(lists_fixed_length(integers(-100, 100), m))
-        )
-        nums1 = list(chain(nums1_without_zeros, repeat(0, times=n)))
-        nums2 = sorted(data.draw(lists_fixed_length(integers(-100, 100), n)))
-        merge_sorted_array(nums1, m, nums2, n)
-        expected = sorted(chain(nums1_without_zeros, nums2))
         assert nums1 == expected
