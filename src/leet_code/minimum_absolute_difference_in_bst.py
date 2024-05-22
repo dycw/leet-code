@@ -42,7 +42,7 @@ def get_minimum_difference(*, root: TreeNode | None = None) -> int:
         return 0
     nodes = list(yield_elements(root=root))
     values = sorted(n.val for n in nodes)
-    return min(b - a for a, b in pairwise(values))
+    return min(abs(b - a) for a, b in pairwise(values))
 
 
 def yield_elements(*, root: TreeNode | None = None) -> Iterator[TreeNode]:
