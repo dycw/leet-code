@@ -28,23 +28,25 @@ Note: This question is the same as 783: https://leetcode.com/problems/minimum-di
 
 from __future__ import annotations
 
-from contextlib import suppress
+from itertools import pairwise
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
+    from collections.abc import Iterator
+
     from leet_code.structures import TreeNode
 
 
 def get_minimum_difference(*, root: TreeNode | None = None) -> int:
     if root is None:
         return 0
-    candidates: list[int] = []
-    if (left := root.left) is not None:
-        candidates.append(abs(root.val - left.val))
-        with suppress(ValueError):
-            candidates.append(get_minimum_difference(root=left))
-    if (right := root.right) is not None:
-        candidates.append(abs(root.val - right.val))
-        with suppress(ValueError):
-            candidates.append(get_minimum_difference(root=right))
-    return min(candidates)
+    nodes = list(yield_elements(root=root))
+    values = sorted(n.val for n in nodes)
+    return min(b - a for a, b in pairwise(values))
+
+
+def yield_elements(*, root: TreeNode | None = None) -> Iterator[TreeNode]:
+    if root is not None:
+        yield from yield_elements(root=root.left)
+        yield root
+        yield from yield_elements(root=root.right)
