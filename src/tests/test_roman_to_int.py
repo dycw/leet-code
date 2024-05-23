@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 
 from pytest import mark, param
 
-from leet_code.roman_to_integer import roman_to_int
+from leet_code.roman_to_integer import roman_to_int, roman_to_int_top
 
 if TYPE_CHECKING:
     from collections.abc import Callable
@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 
 
 class TestRomanToInt:
-    @mark.parametrize("func", [param(roman_to_int)])
+    @mark.parametrize("func", [param(roman_to_int), param(roman_to_int_top)])
     @mark.parametrize(
         ("s", "expected"),
         [

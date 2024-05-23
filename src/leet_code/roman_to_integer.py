@@ -45,7 +45,7 @@ from typing import Literal
 
 
 def roman_to_int(s: str, /) -> int:
-    values: list[int] = []
+    total = 0
     i, n = 0, len(s)
     while i < n:
         if i < n - 1:
@@ -55,9 +55,9 @@ def roman_to_int(s: str, /) -> int:
                 value, inc = convert_single(s[i])
         else:
             value, inc = convert_single(s[i])
-        values.append(value)
+        total += value
         i += inc
-    return sum(values)
+    return total
 
 
 _SINGULAR_VALUES = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
@@ -72,3 +72,17 @@ _DOUBLE_VALUES = {"IV": 4, "IX": 9, "XL": 40, "XC": 90, "CD": 400, "CM": 900}
 
 def convert_double(s: str, /) -> tuple[int, Literal[2]]:
     return _DOUBLE_VALUES[s], 2
+
+
+def roman_to_int_top(s: str, /) -> int:
+    roman_symbol = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
+    sum_ = 0
+    prev_self = 0
+
+    for s_i in reversed(s):
+        if prev_self > roman_symbol[s_i]:
+            sum_ -= roman_symbol[s_i]
+        else:
+            sum_ += roman_symbol[s_i]
+            prev_self = roman_symbol[s_i]
+    return sum_
