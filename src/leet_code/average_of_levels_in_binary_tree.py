@@ -20,12 +20,13 @@ Output: [3.00000,14.50000,11.00000]
 
 Constraints:
 
-The number of nodes in the tree is in the range [1, 104].
--231 <= Node.val <= 231 - 1
+- The number of nodes in the tree is in the range [1, 104].
+- -2^31 <= Node.val <= 2^31 - 1
 """
 
 from __future__ import annotations
 
+from collections import deque
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -53,3 +54,23 @@ def yield_children(nodes: Iterable[TreeNode], /) -> Iterator[TreeNode]:
             yield left
         if (right := node.right) is not None:
             yield right
+
+
+def average_of_levels_top(*, root: TreeNode | None = None) -> list[float]:
+    ans = []
+    q: deque[TreeNode | None] = deque([root])
+    while q:
+        cur_sum = 0
+        cnt = 0
+        for _ in range(len(q)):
+            cur_node = q.popleft()
+            if cur_node:
+                cur_sum += cur_node.val
+                cnt += 1
+                if cur_node.left:
+                    q.append(cur_node.left)
+                if cur_node.right:
+                    q.append(cur_node.right)
+        ans.append(cur_sum / cnt)
+
+    return ans
