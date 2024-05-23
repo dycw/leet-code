@@ -41,4 +41,15 @@ def length_of_last_word(s: str, /) -> int:
 
 
 def _is_space(s: str, /) -> bool:
-    return s == ""
+    return s == " "
+
+
+def length_of_last_word_top(s: str, /) -> int:
+    r = len(s) - 1
+    count = 0
+    while s[r] == " " and r >= 0:
+        r -= 1
+    while s[r] != " " and r >= 0:
+        count += 1
+        r -= 1
+    return count

@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 
 from pytest import mark, param
 
-from leet_code.length_of_last_word import length_of_last_word
+from leet_code.length_of_last_word import length_of_last_word, length_of_last_word_top
 
 if TYPE_CHECKING:
     from collections.abc import Callable
@@ -13,7 +13,9 @@ if TYPE_CHECKING:
 
 
 class TestLengthOfLastWord:
-    @mark.parametrize("func", [param(length_of_last_word)])
+    @mark.parametrize(
+        "func", [param(length_of_last_word), param(length_of_last_word_top)]
+    )
     @mark.parametrize(
         ("s", "expected"),
         [
