@@ -32,7 +32,6 @@ class TestHasCycle:
             param(case_2_node_0, True),
             param(case_3_node_0, False),
         ],
-        ids=str,
     )
     def test_main(self, *, head: ListNode | None, expected: bool) -> None:
         assert has_cycle(head=head) is expected

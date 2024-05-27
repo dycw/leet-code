@@ -72,5 +72,4 @@ def average_of_levels_top(*, root: TreeNode | None = None) -> list[float]:
                 if cur_node.right:
                     q.append(cur_node.right)
         ans.append(cur_sum / cnt)
-
     return ans
